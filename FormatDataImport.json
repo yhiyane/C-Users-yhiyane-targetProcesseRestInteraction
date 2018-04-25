@@ -1,0 +1,35 @@
+{
+   "id":220,
+   "teamProjects":[
+      {
+         "project":{
+            "name":"DevProject1"
+         },
+         "isFullProjectAccess":"true"
+      },
+      {
+         "project":{
+            "name":"OtherProject1"
+         },
+         "isFullProjectAccess":"true"
+      },
+     {
+         "project":{
+            "name":"Project A"
+         },
+         "isFullProjectAccess":"true"
+      },
+     {
+         "project":{
+            "name":"Project X"
+         },
+         "isFullProjectAccess":"true"
+      },
+     {
+         "project":{
+            "name":"Project y"
+         },
+         "isFullProjectAccess":"true"
+      }
+   ]
+}
