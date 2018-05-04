@@ -1,10 +1,11 @@
 {
-   "url":"https://ymagisgroup.tpondemand.com/api/v1/teams.asmx/210",
+   "url":"https://ymagisgroup.tpondemand.com/api/v1/teams.asmx/",
    "querystring":{
       "skip":"0",
       "take":"999",
-      "resultInclude":"[id,teamMembers[id,user[id]]]"
+      "resultInclude":"[id,teamProjects]"
    },
    "url_get_projects":"https://ymagisgroup.tpondemand.com/api/v1/Projects/",
+   "url_get_teams":"https://ymagisgroup.tpondemand.com/api/v1/Teams/",
    "url_Select_Project":"https://ymagisgroup.tpondemand.com/api/v1/Projects/?where=name+eq+"
 }

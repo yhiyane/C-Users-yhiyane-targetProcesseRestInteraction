@@ -1,7 +1,64 @@
 import requests
 import json
 import xmltodict
+import xlrd
+from collections import OrderedDict
 
+#Ouvrez le classeur et sélectionnez la première feuille de calcul
+try:
+    wb = xlrd.open_workbook('Affectation_Team_Projects.xlsx')
+except:
+    print("le fichier n'existe pas");
+    exit();
+try:
+    sh = wb.sheet_by_index(0)
+except:
+    print("la première feuille de calcul est vide!!")
+
+# Liste pour contenir des dictionnaires
+team_projects = {}
+team_projects["teamProjects"] = []
+try:
+    entete = sh.row_values(range(0, sh.nrows)[0])
+    if(entete[0] == ""):
+        exit()
+except:
+    print("forme de votre fichier est incorrecte § entete")
+    exit()
+# Itérer à travers chaque ligne dans la feuille de calcul et extraire les valeurs en dict
+try:
+    row_value = sh.row_values(range(1, sh.nrows)[0])
+except:
+    print("les données erronées!!")
+    exit()
+
+
+playlist = {}
+try:
+    int(row_value[0])
+except:
+    print("la forme de votre fichier est incorrecte!!")
+    exit()
+playlist["id"] = row_value[0]
+playlist["teamProjects"] = []
+for rownum in range(1, sh.nrows):
+    projects = OrderedDict()
+    row_values = sh.row_values(rownum)
+    projectT = {}
+    projectT["project"] = {}
+    projectT["project"]["name"] = row_values[1]
+    projectT["isFullProjectAccess"] = True
+    playlist["teamProjects"].append(projectT)
+
+payload_project = json.dumps(playlist)
+print(payload_project)
+
+# Serialize the list of dicts to JSON
+j = json.dumps(playlist)
+# Write to file
+with open('FormatDataImport.json', 'w') as f:
+    f.write(j)
+        
 
 #Chargement du fichier de configuration Conf.json
 fichier_configuration = open("Conf.json", "r")
@@ -33,7 +90,7 @@ list_all_projects = xmltodict.parse(response_get_projects.text)
 list_all_projects_json = json.dumps(list_all_projects)
 list_all_projects_json_load = json.loads(list_all_projects_json)
 list_import_data_load = json.loads(contenu_fichier_import_data)
-
+print(list_import_data_load)
 listProjetsExistant = []
 print("---------------------------------")
 print("|la liste des projets existants:")
@@ -58,7 +115,7 @@ for item in list_import_data_load['teamProjects']:
         print("le projet num ==> " + item['project']['name'] + " existe déjà il faut l'affecté")
     else:
         #si le projet n'existe pas on le crée
-        print("le projet num ==> " + item['project']['name']+" n'existe pas il faut le créer puis affecté")
+        print("le projet num ==> " + item['project']['name']+" n'existe pas il faut le créer puis l'affecter")
         newproject = {
             "Name": item['project']['name']
         }
@@ -75,12 +132,14 @@ for item in list_import_data_load['teamProjects']:
     selected_project = xmltodict.parse(getObjectsById.text)
     selected_project_json = json.dumps(selected_project)
     selected_project_json_load = json.loads(selected_project_json)
+    #print(selected_project_json_load)
+    #print(selected_project_json_load['Projects']['Project']['@Id'])
     Response_projects.append(selected_project_json_load['Projects']['Project']['@Id'])
 print(Response_projects)
 
-print("//////////////////////////////////////////////////")
+print("-----------------------------------------------")
 print("Construction du fichier .json de l'affectation")
-print("//////////////////////////////////////////////////")
+print("-----------------------------------------------")
 
 #l'affectation des projets
 for item in Response_projects:
