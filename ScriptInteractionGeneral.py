@@ -6,7 +6,7 @@ from collections import OrderedDict
 import socket
 
 
-#Vérification la connecion internet
+#Vérification la la connexion internet
 try:
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect(("www.google.com", 80))
@@ -21,12 +21,12 @@ try:
     wb = xlrd.open_workbook('Affectation_Team_Projects.xlsx')
 except:
     print("fichier inexistant 'Affectation_Team_Projects.xlsx'");
-    exit();
+    exit()
 try:
     sh = wb.sheet_by_index(0)
 except:
     print("la première feuille de calcul est vide!!")
-
+    exit()
 
 # Liste pour contenir des dictionnaires
 team_projects = {}
