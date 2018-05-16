@@ -7,5 +7,15 @@
    },
    "url_get_projects":"https://ymagisgroup.tpondemand.com/api/v1/Projects/",
    "url_get_teams":"https://ymagisgroup.tpondemand.com/api/v1/Teams/",
-   "url_Select_Project":"https://ymagisgroup.tpondemand.com/api/v1/Projects/?where=name+eq+"
+   "url_get_Epics" : "https://ymagisgroup.tpondemand.com/api/v1/Epics/",
+   "url_get_Features" : "https://ymagisgroup.tpondemand.com/api/v1/Features/",
+   "url_get_user_stories" : "https://ymagisgroup.tpondemand.com/api/v1/UserStories/",
+   "url_Select_Project":"https://ymagisgroup.tpondemand.com/api/v1/Projects/?where=name+eq+",
+   "headers" : {"Content-Type": "application/json",
+                "Authorization": "Basic YWRtaW46YWRtaW4=",
+                "Cache-Control": "no-cache",
+                "Postman-Token": "c8b013db-72ae-4363-9be3-40e9eb7435d2"
+   }
+
+
 }
